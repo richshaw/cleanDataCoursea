@@ -48,14 +48,15 @@ downloadUnzipData <- function(url,file,exdir = ".",method="curl") {
   unzip(file,exdir = exdir)
 }
 
-# Download Data if it's not around
+# Brief assumes data is in working dir but will
+# download data if it's not around
 if(!file.exists(file)) {
   # URL of zipped data
   downloadUnzipData(url,file,method="curl")
 }
 
 ##
-# Start analysis script
+# Start cleaning script
 #
 
 # Looking at the description of the data the data in README.txt and
@@ -130,14 +131,20 @@ colnames(data.y) <- c('activity')
 # Give subject the subject id's a friendly column label
 colnames(data.subject) <- c('subject')
 
+print("Given data friendly column names")
+
 ### 3. Uses descriptive activity names to name the activities in the data set
 # The activity data in y isn't really integers they're categories so lets make them so
 data.y[["activity"]] <- factor(data.y[["activity"]],
                                levels = data.label.activity[["V1"]], 
                                labels = data.label.activity[["V2"]])
 
+print("Converted activity column to factor")
+
 # Combine the data together to a representation of all the data in a tidy format
 data.tidy.all <- cbind(data.subject,data.y,data.x) 
+
+print("Combined data into single tidy data set")
 
 ### 2. We're only interested in the measurements on the mean and standard deviation for each measurement...
 # According to features.txt all mean and std dev vars are tagged with mean() and std()
@@ -150,7 +157,16 @@ subsetColumns <- c('subject','activity',stdmeanColumns)
 # Subset data to requried columns
 data.tidy.stdmean <- subset(data.tidy.all, select = subsetColumns)
 
+print("Extracted std and mean variables into tidy data set")
+
 ### 5. Create a second, independent tidy data set with the average of each
 ### variable for each activity and each subject.
-aggregate(. ~ subject+activity,data = data.tidy.all,FUN=function(x) c(mn =mean(x), n=length(x) ) )
-# 
+data.tidy.means <- aggregate(. ~ subject+activity,data = data.tidy.all, mean)
+
+print("Calculated means for each variable for each subject and activity")
+
+#Write ouput 
+write.table(data.tidy.means,"data_tidy_means.txt")
+
+print("Tidy data written to data_tidy_means.txt")
+print("DONE")
