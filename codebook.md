@@ -4,6 +4,8 @@ Codebook for `data_tidy_means.txt`
 
 ## Variables
 
+All continous variables are the mean value per subject per activity.
+
 Number | Variable Name | Data Type
 -------|---------------|----------
 1 | subject | Categorical
