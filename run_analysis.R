@@ -157,6 +157,10 @@ subsetColumns <- c('subject','activity',stdmeanColumns)
 # Subset data to requried columns
 data.tidy.stdmean <- subset(data.tidy.all, select = subsetColumns)
 
+#Tidy column names
+colnames(data.tidy.stdmean) <- gsub("^t", "time", colnames(data.tidy.stdmean))
+colnames(data.tidy.stdmean) <- gsub("^f", "frequency", colnames(data.tidy.stdmean))
+
 print("Extracted std and mean variables into tidy data set")
 
 ### 5. Create a second, independent tidy data set with the average of each
