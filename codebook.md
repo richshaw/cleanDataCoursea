@@ -5,7 +5,7 @@ Codebook for `data_tidy_means.txt`
 ## Variables
 
 Number | Variable Name | Data Type
-----------------------------------
+-------|---------------|----------
 1 | subject | Categorical
 2 | activity | Categorical
 3 | tBodyAcc-mean()-X | Continuous
