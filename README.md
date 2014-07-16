@@ -18,4 +18,3 @@ Repository for Coursea data science course project on getting and cleaning data 
 2. Run the script by calling `source("run_analysis.R")`
 3. Script will print `DONE` when your `data_tidy_means.txt` is ready
 
-

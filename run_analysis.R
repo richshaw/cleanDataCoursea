@@ -161,7 +161,7 @@ print("Extracted std and mean variables into tidy data set")
 
 ### 5. Create a second, independent tidy data set with the average of each
 ### variable for each activity and each subject.
-data.tidy.means <- aggregate(. ~ subject+activity,data = data.tidy.all, mean)
+data.tidy.means <- aggregate(. ~ subject+activity,data = data.tidy.stdmean, mean)
 
 print("Calculated means for each variable for each subject and activity")
 
